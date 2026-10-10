@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scarlet Sun</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Cinzel Decorative, Syne & Cormorant Garamond -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@600;700;900&family=Syne:wght@700;800&family=Plus+Jakarta+Sans:wght@400;600&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      /* Cor do sertão quente, viva e solar */
+      --sertao-bg: #E85D04; 
+      --sertao-gradient: linear-gradient(180deg, #F48C06 0%, #DC2F02 85%, #B72100 100%);
+      /* Cor de terra escura, profunda e fértil */
+      --terra-bg: #1A0F08;
+      --terra-gradient: linear-gradient(180deg, #25140B 0%, #170A04 60%, #0E0602 100%);
+    }
+
+    * {
+      box-sizing: border-box;
+      user-select: none;
+    }
+
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow-x: hidden;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #1A0F08;
+    }
+
+    /* Tipografia de 120px para Scarlet Sun */
+    .title-scarlet {
+      font-family: 'Cinzel Decorative', 'Cinzel', serif;
+      font-size: clamp(48px, 9.5vw, 120px);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      text-shadow: 0 8px 32px rgba(110, 15, 0, 0.45), 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Tipografia de 80px para Play */
+    .play-text {
+      font-family: 'Cinzel', 'Syne', sans-serif;
+      font-size: clamp(44px, 7.5vw, 80px);
+      letter-spacing: 0.22em;
+      text-indent: 0.22em; /* Compensa o espaçamento final para manter centralizado */
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .play-button:hover .play-text {
+      letter-spacing: 0.32em;
+      text-indent: 0.32em;
+      color: #FFBA08;
+      text-shadow: 0 0 35px rgba(255, 186, 8, 0.6), 0 0 10px rgba(244, 140, 6, 0.8);
+      transform: scale(1.05);
+    }
+
+    /* Efeito de granulação de poeira e textura do sertão */
+    .noise-overlay {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.045;
+      background-image: radial-gradient(#fff 1px, transparent 1px);
+      background-size: 8px 8px;
+    }
+
+    /* Linha sutil de calor solar */
+    .horizon-glow {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 2px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: linear-gradient(90deg, transparent 0%, rgba(255, 208, 0, 0.5) 50%, transparent 100%);
+      filter: blur(1px);
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    /* Dimensões exatas solicitadas para a caixa de imagem: 360x200 */
+    .banner-box {
+      width: 360px;
+      height: 200px;
+      max-width: 90vw;
+      transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.45s ease, border-color 0.45s ease;
+    }
+
+    .banner-box:hover {
+      transform: scale(1.035) translateY(-2px);
+      box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.7), 0 0 35px rgba(244, 140, 6, 0.35);
+      border-color: #FFBA08;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col relative selection:bg-amber-400 selection:text-black">
+  
+  <!-- METADE DE CIMA: COR DO SERTÃO FORTE -->
+  <header class="relative w-full h-[50vh] flex flex-col items-center justify-center px-4 overflow-hidden" 
+          style="background: var(--sertao-gradient);">
+    
+    <!-- Nuances de calor e sol distante de fundo -->
+    <div class="absolute w-[700px] h-[700px] rounded-full bg-gradient-to-b from-yellow-300/30 via-orange-400/20 to-transparent blur-3xl pointer-events-none -top-40"></div>
+    <div class="noise-overlay"></div>
+
+    <!-- Título Scarlet Sun em 120px -->
+    <div class="z-10 text-center relative max-w-6xl pb-8 md:pb-12">
+      <p class="text-xs md:text-sm font-semibold uppercase tracking-[0.4em] text-amber-200/80 mb-2 drop-shadow">
+        
+      </p>
+      <h1 class="title-scarlet text-amber-50 font-black uppercase">
+        Scarlet Sun
+      </h1>
+      <div class="w-24 h-1 bg-gradient-to-r from-transparent via-amber-200/70 to-transparent mx-auto mt-3 rounded-full"></div>
+    </div>
+  </header>
+
+  <!-- Divisor e linha sutil de horizonte -->
+  <div class="horizon-glow"></div>
+
+  <!-- BANNER 360x200 NO CENTRO ENTRE O TÍTULO E O PLAY -->
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30">
+    <a href="#" 
+       id="bannerLink"
+       target="_blank" 
+       rel="noopener noreferrer"
+       class="banner-box group block rounded-2xl overflow-hidden border-2 border-amber-900/60 bg-[#160b05] shadow-2xl relative cursor-pointer"
+       title="Clique para acessar">
+      
+      <!-- Imagem artística representativa com atmosfera árida / sertão -->
+      <img src="https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=720&q=80" 
+           alt="Banner Scarlet Sun" 
+           class="w-full h-full object-cover object-center filter brightness-90 contrast-110 group-hover:scale-105 transition-transform duration-700 ease-out"
+           loading="lazy"
+           onerror="this.src='https://placehold.co/360x200/2A1208/F48C06?text=SCARLET+SUN+360x200';">
+
+      <!-- Sobreposição estilizada sobre o banner -->
+      <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent flex flex-col justify-end p-4">
+        <div class="flex items-center justify-between">
+          <div>
+            <span class="inline-block px-2 py-0.5 text-[10px] uppercase font-bold tracking-widest bg-amber-500/90 text-black rounded mb-1">
+              Destaque
+            </span>
+            <p class="text-sm font-bold text-amber-100 group-hover:text-yellow-400 transition-colors">
+              Explorar Território
+            </p>
+          </div>
+          <!-- Ícone indicador de link externo -->
+          <div class="w-8 h-8 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-amber-300 group-hover:bg-amber-500 group-hover:text-black transition-all">
+            <svg class="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Efeito de brilho de borda sutil ao passar o cursor -->
+      <div class="absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/15 pointer-events-none"></div>
+    </a>
+  </div>
+
+  <!-- METADE DE BAIXO: COR DE TERRA ESCURA -->
+  <main class="relative w-full h-[50vh] flex flex-col items-center justify-center px-4 overflow-hidden" 
+        style="background: var(--terra-gradient);">
+    
+    <div class="noise-overlay"></div>
+
+    <!-- Botão / Texto Play em 80px -->
+    <div class="z-10 text-center pt-8 md:pt-12">
+      <button type="button" 
+              id="playBtn"
+              class="play-button inline-flex flex-col items-center justify-center group focus:outline-none transition-transform active:scale-95 cursor-pointer bg-transparent border-0">
+        
+        <span class="play-text font-black text-amber-100/95 uppercase drop-shadow-[0_4px_24px_rgba(0,0,0,0.9)]">
+          Play
+        </span>
+
+        <!-- Linha decorativa animada do botão Play -->
+        <div class="w-16 group-hover:w-36 h-[2px] bg-gradient-to-r from-transparent via-amber-500 to-transparent transition-all duration-500 ease-out mt-1 opacity-60 group-hover:opacity-100"></div>
+        
+        <span class="text-[11px] uppercase tracking-[0.3em] text-stone-500 group-hover:text-amber-400/80 transition-colors mt-2 font-medium">
+         
+        </span>
+      </button>
+    </div>
+
+    <!-- Rodapé minimalista discreto -->
+    <div class="absolute bottom-4 text-center w-full pointer-events-none">
+      <p class="text-[11px] tracking-widest uppercase text-stone-600 font-semibold">
+        Sertão &bullet; Terra &bullet; 2026
+      </p>
+    </div>
+  </main>
+
+  <!-- Notificação sutil não intrusiva ao interagir com o link/play -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 bg-[#2b170c] border border-amber-500/40 text-amber-200 text-xs px-4 py-2.5 rounded-xl shadow-2xl opacity-0 translate-y-3 transition-all duration-300 pointer-events-none">
+    Destino em desenvolvimento.
+  </div>
+
+  <script>
+    // Gerenciamento dos cliques para feedback visual
+    const bannerLink = document.getElementById('bannerLink');
+    const playBtn = document.getElementById('playBtn');
+    const toast = document.getElementById('toast');
+
+    function showNotice(msg) {
+      toast.textContent = msg;
+      toast.classList.remove('opacity-0', 'translate-y-3');
+      toast.classList.add('opacity-100', 'translate-y-0');
+      
+      setTimeout(() => {
+        toast.classList.remove('opacity-100', 'translate-y-0');
+        toast.classList.add('opacity-0', 'translate-y-3');
+      }, 2600);
+    }
+
+    bannerLink.addEventListener('click', (e) => {
+      // Se não houver link definido ainda (#), exibe aviso suave
+      if (bannerLink.getAttribute('href') === '#') {
+        e.preventDefault();
+        showNotice('Link do banner pronto para receber sua URL de destino.');
+      }
+    });
+
+    playBtn.addEventListener('click', () => {
+      showNotice('Iniciando experiência de Scarlet Sun...');
+    });
+  </script>
+</body>
+</html>
